@@ -1,7 +1,7 @@
 import RInputPassword from "files/atoms/password";
 import { useForm, FormProvider } from "react-hook-form";
 import { ThemeProvider } from "styled-components";
-import { themes } from "./styles";
+import { themes, ThemesI } from "./styles";
 
 export const Themes = {
   default: themes.default,
@@ -10,7 +10,7 @@ export const Themes = {
 export interface RInputFormProps {
   children: JSX.Element | JSX.Element[] | string;
   useFormProps?: object | null | any;
-  theme?: "default";
+  theme?: keyof ThemesI;
   onSubmit?: any;
 }
 

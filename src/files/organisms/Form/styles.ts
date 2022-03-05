@@ -23,7 +23,7 @@ export interface ThemeI {
 }
 
 export interface ThemesI {
-    default: ThemeI
+    "default": ThemeI;
 }
 export const themes: ThemesI = {
     default: {

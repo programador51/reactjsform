@@ -1,7 +1,24 @@
 {
   "name": "ripass",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
+  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "homepage": "https://silly-ritchie-eec7bf.netlify.app",
+  "repository": {
+    "url": "https://github.com/programador51/reactjsform",
+    "type": "git"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
@@ -17,17 +34,16 @@
     "@types/react-dom": "^17.0.11",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hook-form": "^7.26.0",
     "react-scripts": "5.0.0",
     "styled-components": "^5.3.3",
     "typescript": "^4.5.5",
     "uuid": "^8.3.2",
-    "web-vitals": "^2.1.4",
-    "yup": "^0.32.11"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "start-storybook -p 6006 -s public",
-    "build": "build-storybook -s public"
+    "build": "npm run clean",
+    "clean": "rimraf dist/"
   },
   "eslintConfig": {
     "extends": [
@@ -68,6 +84,8 @@
     "@storybook/react": "^6.4.18",
     "@types/styled-components": "^5.1.22",
     "@types/uuid": "^8.3.4",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^3.0.2",
     "webpack": "^5.68.0"
   }
 }

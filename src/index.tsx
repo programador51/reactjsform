@@ -1,9 +1,8 @@
-import Password, {
-  BulletValidationI,
-  RequiredI,
-  onChangePaswordI,
-  RInputPasswordProps,
-} from "files/atoms/password";
-export * from "files/helpers/bulletValidations";
+import Password from "./files/atoms/password/index";
+export {
+  bulletAtLeastOneOfThisChars,
+  bulletJustLetters,
+  bulletMaxLegth,
+  bulletMinLegth,
+} from "./files/helpers/bulletValidations";
 export { Password };
-export { RInputForm } from "files/organisms/Form";

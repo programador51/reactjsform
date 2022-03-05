@@ -2,7 +2,7 @@ import React from "react";
 import usePassword from "./usePassword";
 import Icon from "../icons";
 import { ThemeProvider } from "styled-components";
-import { themes } from "files/organisms/Form/styles";
+import { themes, ThemesI } from "files/organisms/Form/styles";
 import { Themes } from "files/organisms/Form";
 import {
   IsRequired,
@@ -59,7 +59,7 @@ export interface RInputPasswordProps {
    */
   name?: string;
 
-  theme: "default";
+  theme: keyof ThemesI;
 
   /**
    * True if a button to show the password typed must me
@@ -113,7 +113,7 @@ export default function RInputPassword({
     });
 
   return (
-    <ThemeProvider theme={Themes[`${theme}`]}>
+    <ThemeProvider theme={Themes[theme]}>
       <div className={className}>
         <label htmlFor={id}>
           {label}
