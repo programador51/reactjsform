@@ -42,8 +42,9 @@
   },
   "scripts": {
     "start": "start-storybook -p 6006 -s public",
-    "build": "npm run clean",
-    "clean": "rimraf dist/"
+    "build": "npm run clean && tsc && copy-files",
+    "clean": "rimraf dist/",
+    "copy-files": "copyfiles -u 1 src/**/*.css dist/"
   },
   "eslintConfig": {
     "extends": [
@@ -86,6 +87,15 @@
     "@types/uuid": "^8.3.4",
     "copyfiles": "^2.4.1",
     "rimraf": "^3.0.2",
+    "semantic-release": "^19.0.2",
     "webpack": "^5.68.0"
-  }
+  },
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ]
 }
