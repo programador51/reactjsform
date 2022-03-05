@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Btn, { ButtonPropsI } from "./index";
-import { themes } from "files/organisms/Form/styles";
+// import { themes } from "files/organisms/Form/styles";
+import { themes } from "../../organisms/Form/styles";
 
 export const Button = styled(Btn)`
     border:none;

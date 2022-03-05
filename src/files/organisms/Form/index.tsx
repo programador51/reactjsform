@@ -1,4 +1,5 @@
-import RInputPassword from "files/atoms/password";
+// import RInputPassword from "files/atoms/password";
+import RInputPassword from "../../atoms/password";
 import { themes, ThemesI } from "./styles";
 
 export const Themes = {

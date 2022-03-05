@@ -2,8 +2,10 @@ import React from "react";
 import usePassword from "./usePassword";
 import Icon from "../icons";
 import { ThemeProvider } from "styled-components";
-import { themes, ThemesI } from "files/organisms/Form/styles";
-import { Themes } from "files/organisms/Form";
+// import { themes, ThemesI } from "files/organisms/Form/styles";
+import { themes, ThemesI } from "../../organisms/Form/styles";
+// import { Themes } from "files/organisms/Form";
+import { Themes } from "../../organisms/Form";
 import {
   IsRequired,
   BulletValidation,
