@@ -1,6 +1,4 @@
 import RInputPassword from "files/atoms/password";
-import { useForm, FormProvider } from "react-hook-form";
-import { ThemeProvider } from "styled-components";
 import { themes, ThemesI } from "./styles";
 
 export const Themes = {
@@ -14,29 +12,8 @@ export interface RInputFormProps {
   onSubmit?: any;
 }
 
-export function RInputForm({
-  children,
-  useFormProps = null,
-  theme = "default",
-  onSubmit = null,
-}: RInputFormProps) {
-  const methods = useForm(useFormProps);
-
-  return (
-    <ThemeProvider theme={Themes[theme]}>
-      <FormProvider {...methods}>
-        <form
-          noValidate
-          onSubmit={methods.handleSubmit(
-            (data) => onSubmit(data),
-            (errors, event) => onSubmit(errors, event)
-          )}
-        >
-          {children}
-        </form>
-      </FormProvider>
-    </ThemeProvider>
-  );
+export function RInputForm() {
+  return <p>Na</p>;
 }
 
 RInputForm.Password = RInputPassword;
