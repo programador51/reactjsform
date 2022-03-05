@@ -10,7 +10,7 @@ export interface RInputFormProps {
     theme?: keyof ThemesI;
     onSubmit?: any;
 }
-export declare function RInputForm({ children, useFormProps, theme, onSubmit, }: RInputFormProps): JSX.Element;
+export declare function RInputForm(): JSX.Element;
 export declare namespace RInputForm {
     var Password: typeof RInputPassword;
 }
