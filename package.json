@@ -26,6 +26,7 @@
     "url": "https://github.com/programador51/reactjsform",
     "type": "git"
   },
+  "homepage": "https://programador51.github.io/reactjsform",
   "release": {
     "branches": [
       "main"
@@ -58,7 +59,7 @@
   },
   "scripts": {
     "start": "start-storybook -p 6006 -s public",
-    "docsb": "build-storybook -s public",
+    "docsb": "build-storybook -s public -- -o ./docs",
     "build": "npm run clean && tsc && npm run copy-files && npm run docsb",
     "clean": "rimraf dist/",
     "copy-files": "copyfiles -u 1 src/**/*.css dist/"
