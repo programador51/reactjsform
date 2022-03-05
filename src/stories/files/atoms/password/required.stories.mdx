@@ -1,0 +1,45 @@
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import { Component } from "react";
+import Password from "../../../../files/atoms/password/index";
+
+<Meta title="Password/Required" />
+
+# Required
+
+You can put required the input following the next structure.
+
+```ts
+export interface RequiredI {
+  /**
+   * Indicates if the password is required
+   */
+  isRequired: boolean;
+
+  /**
+   * Message to display in case the password haven't been supplied
+   */
+  message: string;
+}
+```
+
+<Password
+  label="My custom password label"
+  showPasswordButton={true}
+  required={{
+    isRequired: true,
+    message: "(Password required)",
+  }}
+/>
+
+```tsx
+import { Password } from "ripass";
+
+<Password
+  label="My custom password label"
+  showPasswordButton={true}
+  required={{
+    isRequired: true,
+    message: "(Password required)",
+  }}
+/>;
+```

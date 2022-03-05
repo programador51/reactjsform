@@ -3,7 +3,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { ThemeProvider } from "styled-components";
 import { themes } from "./styles";
 
-const Themes = {
+export const Themes = {
   default: themes.default,
 };
 

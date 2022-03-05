@@ -1,0 +1,72 @@
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import Password from "../../../../files/atoms/password/index";
+import {
+  bulletMinLegth,
+  bulletMaxLegth,
+} from "../../../../files/helpers/bulletValidations";
+
+<Meta title="Password/Validations/Types/Custom bullet validations" />
+
+# Custom bullet validations
+
+In case you need validate the text and there's not a bullet, you can create your owns, just following the same structure
+showed bellow.
+
+```ts
+export interface BulletValidationI {
+  /**
+   * If the function you pass as argument returns true, it means that the password
+   * typed by the user is correct, otherwise has an error
+   */
+  validationFunction: (passwordText: string) => boolean;
+
+  /**
+   * Message to display on the bullet
+   */
+  message: string;
+
+  /**
+   * If true, when the password is correct, the bullet will disappear
+   */
+  hideOnValid?: boolean;
+}
+```
+
+1. Create the object (`bulletValidation`), in this case the example it's made with regex, but the code
+   inside can be anything.
+
+```js
+// objectThatCanBeAnywhereYouWant.js
+export const justNumbers = {
+  validationFunction: (textReceivedFromComponent) =>
+    /^[0-9]*$/.test(textReceivedFromComponent),
+  message: "Solo numeros!!! :)",
+  hideOnValid: true,
+};
+```
+
+2. Pass it as param on the component
+
+```tsx
+import { Password } from "ripass";
+import { justNumbers } from "your_path/objectThatCanBeAnywhereYouWant.js";
+
+<Password
+  label="My custom password label"
+  showPasswordButton={true}
+  bulletValidations={[justNumbers]}
+/>;
+```
+
+<Password
+  label="My custom password label"
+  showPasswordButton={true}
+  bulletValidations={[
+    {
+      validationFunction: (textReceivedFromComponent) =>
+        /^[0-9]*$/.test(textReceivedFromComponent),
+      message: "Solo numeros!!! :)",
+      hideOnValid: true,
+    },
+  ]}
+/>

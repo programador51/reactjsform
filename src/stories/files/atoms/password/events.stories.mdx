@@ -1,0 +1,55 @@
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import { Component } from "react";
+import Password from "../../../../files/atoms/password/index";
+import {
+  bulletMinLegth,
+  bulletMaxLegth,
+} from "../../../../files/helpers/bulletValidations";
+
+<Meta title="Password/Events" />
+
+# Events
+
+HTML events available for the input
+
+## onChange
+
+`onChange` returns an object that gives information according the password typed by the user:
+
+```ts
+export interface onChangePaswordI {
+  /**
+   * Number of errors in case the required and bulletValidations was passed on the component
+   */
+  noErrors: number;
+
+  /**
+   * Value of the input password typed
+   */
+  password: string;
+}
+```
+
+<Password
+  label="Password"
+  showPasswordButton={true}
+  required={{
+    isRequired: true,
+    message: "(Password required)",
+  }}
+  bulletValidations={[bulletMinLegth(2), bulletMaxLegth(30)]}
+  onChange={(infoPassword) => alert(JSON.stringify(infoPassword))}
+/>
+
+```jsx
+<Password
+  label="Password"
+  showPasswordButton={true}
+  required={{
+    isRequired: true,
+    message: "(Password required)",
+  }}
+  bulletValidations={[bulletMinLegth(2), bulletMaxLegth(30)]}
+  onChange={(infoPassword) => alert(JSON.stringify(infoPassword))}
+/>
+```

@@ -28,7 +28,7 @@ export interface ThemesI {
 export const themes: ThemesI = {
     default: {
         primary_color: "#1d1d1d",
-        font_family: "'Trebuchet MS'",
+        font_family: "'Arial'",
         errorColor: "#e32525",
         successColor: "#309016",
         input: {

@@ -1,0 +1,107 @@
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import { Component } from "react";
+import Password from "../../../../files/atoms/password/index";
+import {
+  bulletMinLegth,
+  bulletMaxLegth,
+} from "../../../../files/helpers/bulletValidations";
+
+<Meta title="Password/TS Interfaces" />
+
+# Password
+
+**Hint:** The library it's made with TS, so you will see the typings on your code editor.
+
+## Typying
+
+Just the types that needs the component in order to work.
+
+### Typing - RInputPasswordProps
+
+```ts
+export interface RInputPasswordProps {
+  /**
+   * Name attribute of the input
+   */
+  name?: string;
+
+  theme: "default";
+
+  /**
+   * True if a button to show the password typed must me
+   */
+  showPasswordButton?: boolean;
+
+  /**
+   * Class name of the div conainer. Can use styled components
+   */
+  className?: string;
+
+  /**
+   * Label to show
+   */
+  label: string;
+
+  required?: {
+    isRequired: boolean;
+    message: string;
+  };
+
+  /**
+   * Information in order to render bullet validations for the password
+   */
+  bulletValidations?: BulletValidationI[] | null;
+
+  /**
+   * Information of the password when the user types something
+   */
+  onChange: (object: onChangePaswordI) => void;
+}
+```
+
+### Typing - onChangePaswordI
+
+```ts
+export interface onChangePaswordI {
+  noErrors: number;
+  password: string;
+}
+```
+
+### Typing - BulletValidationI
+
+```ts
+export interface BulletValidationI {
+  /**
+   * If the function you pass as argument returns true, it means that the password
+   * typed by the user is correct, otherwise has an error
+   */
+  validationFunction: (passwordText: string) => boolean;
+
+  /**
+   * Message to display on the bullet
+   */
+  message: string;
+
+  /**
+   * If true, when the password is correct, the bullet will disappear
+   */
+  hideOnValid?: boolean;
+}
+```
+
+### Typing - RequiredI
+
+```ts
+export interface RequiredI {
+  /**
+   * Indicates if the password is required
+   */
+  isRequired: boolean;
+
+  /**
+   * Message to display in case the password haven't been supplied
+   */
+  message: string;
+}
+```

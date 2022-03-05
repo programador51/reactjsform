@@ -18,11 +18,6 @@ export const Password = styled(Pass)`
     display: inline-block;
     width: 100%;
 
-    *{
-        font-family:${({ theme }) => theme.font_family};
-
-    }
-
     p{
         color:${({ theme }) => theme.primary_color};
         margin: 0 0 0.5rem 0;
@@ -31,6 +26,11 @@ export const Password = styled(Pass)`
     label{
         display: block;
         color:${({ theme }) => theme.primary_color}
+    }
+
+    *{
+        font-family:serif;
+
     }
 `;
 
@@ -68,7 +68,7 @@ export const PasswordField = styled.div<ShowPasswordPropsI>`
         border:0.125rem solid ${({ theme }) => theme.input.borderColor};
         padding:0.5rem;
         background-color:${({ theme }) => theme.input.bgColor};  
-        border-right:${({ showPassword }) => !showPassword ? "0.125rem" : 0};      
+        border-right:${({ showPassword }) => !showPassword ? "1" : "0"};      
         width:100%;
     }
 

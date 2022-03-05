@@ -1,0 +1,20 @@
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import { Component } from "react";
+import Password from "../../../../files/atoms/password/index";
+import {
+  bulletMinLegth,
+  bulletMaxLegth,
+} from "../../../../files/helpers/bulletValidations";
+
+<Meta title="Password/Label" />
+
+# Label
+
+In order to change the label of the Component, you pass the prop `label`. For instance
+
+<Password label="My custom password label" showPasswordButton={false} />
+
+```tsx
+import { Password } from "ripass";
+<Password label="My custom password label" showPasswordButton={false} />;
+```

@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { useFormContext } from "react-hook-form";
+import React from "react";
 import usePassword from "./usePassword";
 import Icon from "../icons";
-import { ThemeContext } from "styled-components";
-import { ThemeI } from "files/organisms/Form/styles";
+import { ThemeProvider } from "styled-components";
+import { themes } from "files/organisms/Form/styles";
+import { Themes } from "files/organisms/Form";
 import {
   IsRequired,
   BulletValidation,
@@ -11,21 +11,46 @@ import {
   PasswordField,
 } from "./styles";
 
-export interface RInputPasswordAtLeastI {
+export interface onChangePaswordI {
   /**
-   * Character to evaluate
+   * Number of errors in case the required and bulletValidations was passed on the component
    */
-  character: string | RegExp;
+  noErrors: number;
 
   /**
-   * Message to show in case it's wrong
+   * Value of the input password typed
+   */
+  password: string;
+}
+
+export interface BulletValidationI {
+  /**
+   * If the function you pass as argument returns true, it means that the password
+   * typed by the user is correct, otherwise has an error
+   */
+  validationFunction: (passwordText: string) => boolean;
+
+  /**
+   * Message to display on the bullet
    */
   message: string;
 
   /**
-   * Indicates if that particular validations it's ok
+   * If true, when the password is correct, the bullet will disappear
    */
-  isValid?: boolean;
+  hideOnValid?: boolean;
+}
+
+export interface RequiredI {
+  /**
+   * Indicates if the password is required
+   */
+  isRequired: boolean;
+
+  /**
+   * Message to display in case the password haven't been supplied
+   */
+  message: string;
 }
 
 export interface RInputPasswordProps {
@@ -33,6 +58,8 @@ export interface RInputPasswordProps {
    * Name attribute of the input
    */
   name?: string;
+
+  theme: "default";
 
   /**
    * True if a button to show the password typed must me
@@ -55,37 +82,14 @@ export interface RInputPasswordProps {
   };
 
   /**
-   * Min length of characters in order to be valid
+   * Information in order to render bullet validations for the password
    */
-  min?: {
-    /**
-     * Minimum characters to be valid
-     */
-    length: number;
-    /**
-     * "Message to display in case the validation its wrong"
-     */
-    message: string;
-  };
-
-  max?: {
-    /**
-     * Max characters allowed to type on input
-     */
-    legth: number | null;
-
-    /**
-     * Message to display on the bullet error
-     */
-    message: string;
-  };
-
-  atLeast?: RInputPasswordAtLeastI[] | null;
+  bulletValidations?: BulletValidationI[] | null;
 
   /**
-   * When validation bullets are correct, hide them
+   * Information of the password when the user types something
    */
-  hideOnValid?: boolean;
+  onChange: (object: onChangePaswordI) => void;
 }
 
 export default function RInputPassword({
@@ -97,93 +101,75 @@ export default function RInputPassword({
     isRequired: false,
     message: "",
   },
-  hideOnValid = true,
-  min = {
-    length: 8,
-    message: "Minimum 8 characters",
-  },
-  max = {
-    legth: null,
-    message: "",
-  },
-  atLeast = null,
+  theme = "default",
+  bulletValidations = null,
+  onChange = () => {},
 }: RInputPasswordProps) {
-  const { register } = useFormContext();
-
-  const { errorColor, successColor }: ThemeI = useContext(ThemeContext);
-
   const { password, handleOnChange, id, toggleShowPassword, showPassword } =
     usePassword({
-      min,
-      max: max.legth,
-      atLeast,
       isRequired: required.isRequired,
+      bulletValidations,
+      onChange,
     });
 
   return (
-    <div className={className}>
-      <label htmlFor={id}>
-        {label}
+    <ThemeProvider theme={Themes[`${theme}`]}>
+      <div className={className}>
+        <label htmlFor={id}>
+          {label}
 
-        <IsRequired>
-          {required.isRequired
-            ? password.isValidRequired
-              ? null
-              : required.message
-            : null}
-        </IsRequired>
-      </label>
+          <IsRequired>
+            {required.isRequired
+              ? password.isValidRequired
+                ? null
+                : required.message
+              : null}
+          </IsRequired>
+        </label>
 
-      <PasswordField showPassword={showPasswordButton}>
-        <input
-          id={id}
-          type="password"
-          {...register(name)}
-          onChange={(e) => handleOnChange(e.target.value)}
-        />
-        {showPasswordButton ? (
-          <ShowPassword
-            showPassword={showPassword}
-            onClick={toggleShowPassword}
-          >
-            <Icon icon={showPassword ? "eyeSlash" : "eye"} />
-          </ShowPassword>
-        ) : null}
-      </PasswordField>
-
-      {hideOnValid && password.isValidMin ? null : (
-        <p>
-          <BulletValidation
-            color={password.isValidMin ? successColor : errorColor}
-            icon={password.isValidMin ? "checkCircle" : "timesCircle"}
+        <PasswordField showPassword={showPasswordButton}>
+          <input
+            id={id}
+            type="password"
+            name={name}
+            onChange={(e) => handleOnChange(e.target.value)}
           />
-          {min.message}
-        </p>
-      )}
+          {showPasswordButton ? (
+            <ShowPassword
+              showPassword={showPassword}
+              onClick={toggleShowPassword}
+            >
+              <Icon icon={showPassword ? "eyeSlash" : "eye"} />
+            </ShowPassword>
+          ) : null}
+        </PasswordField>
 
-      {hideOnValid && password.isValidMax ? null : max.legth !== null ? (
-        <p>
-          <BulletValidation
-            color={password.isValidMax ? successColor : errorColor}
-            icon={password.isValidMax ? "checkCircle" : "timesCircle"}
-          />
-          {max.message}
-        </p>
-      ) : null}
+        {bulletValidations !== null
+          ? bulletValidations.map((validation) => {
+              const isValid = validation.validationFunction(password.password);
 
-      {password.atLeast.errors.map((element: any) => (
-        <>
-          {hideOnValid && element.isValid ? null : (
-            <p>
-              <BulletValidation
-                icon={element.isValid ? "checkCircle" : "timesCircle"}
-                color={element.isValid ? successColor : errorColor}
-              />
-              <span>{element.message}</span>
-            </p>
-          )}
-        </>
-      ))}
-    </div>
+              return isValid ? (
+                validation.hideOnValid ? null : (
+                  <p>
+                    <BulletValidation
+                      icon="checkCircle"
+                      color={themes[theme].successColor}
+                    />
+                    <span>{validation.message}</span>
+                  </p>
+                )
+              ) : (
+                <p>
+                  <BulletValidation
+                    icon="timesCircle"
+                    color={themes[theme].errorColor}
+                  />
+                  <span>{validation.message}</span>
+                </p>
+              );
+            })
+          : null}
+      </div>
+    </ThemeProvider>
   );
 }

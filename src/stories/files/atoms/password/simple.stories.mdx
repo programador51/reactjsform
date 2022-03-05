@@ -1,0 +1,20 @@
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import { Component } from "react";
+import Password from "../../../../files/atoms/password/index";
+import {
+  bulletMinLegth,
+  bulletMaxLegth,
+} from "../../../../files/helpers/bulletValidations";
+
+<Meta title="Password/Basic Password" />
+
+# Basic password
+
+You can render an input password with a button that you can press to reveal the text typed
+
+<Password label="Password" />
+
+```tsx
+import { Password } from "ripass";
+<Password label="Password" />;
+```

@@ -1,0 +1,39 @@
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import Password from "../../../../files/atoms/password/index";
+import {
+  bulletMinLegth,
+  bulletMaxLegth,
+} from "../../../../files/helpers/bulletValidations";
+
+<Meta title="Password/Validations/Bullet validations" />
+
+# Validations
+
+You can render the component with bullet validations like:
+
+- Max `x` characters
+- Min `x` characters
+- Just letters
+- Etc...
+
+<Password
+  label="My custom password label"
+  showPasswordButton={true}
+  bulletValidations={[bulletMinLegth(10), bulletMaxLegth(15)]}
+/>
+
+```tsx
+import { Password, bulletMinLegth, bulletMaxLegth } from "ripass";
+
+<Password
+  label="My custom password label"
+  showPasswordButton={true}
+  bulletValidations={[bulletMinLegth(10), bulletMaxLegth(15)]}
+/>;
+```
+
+Some validations are ready to use, but these can be customized too.
+The're 2 types of **`bulletValidations`**:
+
+1. Default bullet validations
+2. Custom bullet validations

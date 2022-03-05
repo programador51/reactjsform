@@ -1,0 +1,36 @@
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import Password from "../../../../files/atoms/password/index";
+import {
+  bulletMinLegth,
+  bulletMaxLegth,
+} from "../../../../files/helpers/bulletValidations";
+
+<Meta title="Password/Validations/Types/Default bullet validations" />
+
+# Default validations
+
+This validations are objects that are ready to use on the component, just need to import them and pass them on the `bulletValidations`
+props.
+
+## Bullet validations available
+
+- bulletMinLegth
+- bulletAtLeastOneOfThisChars
+- bulletMaxLegth
+- bulletJustLetters
+
+<Password
+  label="My custom password label"
+  showPasswordButton={true}
+  bulletValidations={[bulletMinLegth(10), bulletMaxLegth(15)]}
+/>
+
+```tsx
+import { Password, bulletMinLegth, bulletMaxLegth } from "ripass";
+
+<Password
+  label="My custom password label"
+  showPasswordButton={true}
+  bulletValidations={[bulletMinLegth(10), bulletMaxLegth(15)]}
+/>;
+```
